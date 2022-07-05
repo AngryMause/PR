@@ -46,4 +46,10 @@ dependencies {
 
     def appsFlyerVersion = "6.3.2"
 //    implementation 'com.appsflyer:af-android-sdk:appsFlyerVersion'
+    def fragment_ktx_ver = '1.5.0'
+    def lifecycle_ktx_ver = '2.4.1'
+    implementation "androidx.fragment:fragment-ktx:${fragment_ktx_ver}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_ktx_ver}"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
 }
