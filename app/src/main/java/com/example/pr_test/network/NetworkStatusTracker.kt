@@ -1,4 +1,4 @@
-package com.example.pr_test.ui
+package com.example.pr_test.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,12 +8,9 @@ import android.net.NetworkRequest
 import android.util.Log
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-private const val DEBOUNCE = 50L
 class NetworkStatusTracker(context: Context) {
-
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -45,7 +42,6 @@ class NetworkStatusTracker(context: Context) {
             connectivityManager.unregisterNetworkCallback(networkStatusCallback)
         }
     }
-        .debounce(DEBOUNCE)
         .distinctUntilChanged()
 
 }
