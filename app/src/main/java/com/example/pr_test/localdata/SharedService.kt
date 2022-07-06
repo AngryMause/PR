@@ -12,27 +12,27 @@ class SharedService(context: Context) {
     private var myShared: SharedPreferences = prefSetting
     private lateinit var editor: SharedPreferences.Editor
 
-    fun writeToShare(value: Boolean) {
+    fun writeToShareIsSignIn(value: Boolean) {
         editor = myShared.edit()
-        editor.putBoolean("lol", value)
+        editor.putBoolean(IS_FIRST_SIGN_IN, value)
         editor.apply()
     }
 
     fun writeURLToShared(value: String) {
         editor = myShared.edit()
-        editor.putString("url", value)
+        editor.putString(HTTP_URL, value)
         editor.apply()
     }
 
 
     fun readFromSharedIsSign(defValue: Boolean): Boolean {
         myShared = prefSetting
-        return myShared.getBoolean("lol", defValue)
+        return myShared.getBoolean(IS_FIRST_SIGN_IN, defValue)
     }
 
     fun readFromSharedUrl(defValue: String): String {
         myShared = prefSetting
-        return myShared.getString("url", defValue)!!
+        return myShared.getString(HTTP_URL, defValue)!!
     }
 
 }

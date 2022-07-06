@@ -8,12 +8,12 @@ import android.net.NetworkRequest
 import android.util.Log
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 class NetworkStatusTracker(context: Context) {
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
     val networkStatus = callbackFlow {
         trySend(NetworkStatus.Unavailable)
         val networkStatusCallback = object : ConnectivityManager.NetworkCallback() {
@@ -32,16 +32,15 @@ class NetworkStatusTracker(context: Context) {
                 trySend(NetworkStatus.Unavailable)
             }
         }
-
         val request = NetworkRequest.Builder()
             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             .build()
         connectivityManager.registerNetworkCallback(request, networkStatusCallback)
-
         awaitClose {
             connectivityManager.unregisterNetworkCallback(networkStatusCallback)
         }
     }
+        .debounce(500L)
         .distinctUntilChanged()
 
 }

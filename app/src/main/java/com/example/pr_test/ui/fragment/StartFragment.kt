@@ -32,6 +32,7 @@ class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::i
         lifecycleScope.launch {
             networkStatus.networkStatus.collect {
                 if (it is NetworkStatus.Available) {
+                    mySharedService.writeToShareIsSignIn(true)
                     activity?.supportFragmentManager?.beginTransaction()?.apply {
                         replace(R.id.main_container,
                             WebViewFragment.newInstance())
