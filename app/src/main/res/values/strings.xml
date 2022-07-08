@@ -4,5 +4,6 @@
     <string name="dismiss">Dismiss</string>
     <string name="accept">Accept</string>
     <string name="facebook_app_id">1015249442488212</string>
-    <string name="fb_login_protocol_scheme">1015249442488212</string>
+    <string name="fb_login_protocol_scheme">fb1015249442488212</string>
+    <string name="facebook_client_token">1dc28cc38e11f6598453acc64ef7a9fb</string>
 </resources>
